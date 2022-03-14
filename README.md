@@ -42,6 +42,20 @@
 - 通用脚手架工具剖析
 - 开发一款脚手架
 
+### 常用的脚手架工具
+
+- React.js项目 --> create-react-app
+- Vue.js项目 --> vue-cli
+- Angular项目 --> angular-cli
+- Yeoman
+- Plop
+
+
+## Yeoman
+The web's scaffolding tool for modern webapps
+
+
+$ yo chrome-extension
 
 
 **相关参考**
