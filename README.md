@@ -1,18 +1,18 @@
 <div align="center">
   <h1>web-cli</h1>
   <p>前端脚手架工具开发学习---前端工程化的发起者</p>
-  <!-- <a href="https://github.com/onlyLucky/webpack-principle">
+  <a href="https://github.com/onlyLucky/web-cli">
     <img src="https://s4.ax1x.com/2022/02/28/bu6BJx.png" alt="node">
   </a>
-  <a href="https://github.com/onlyLucky/webpack-principle">
+  <a href="https://github.com/onlyLucky/web-cli">
     <img src="https://s4.ax1x.com/2022/02/28/bu6yQO.png" alt="npm">
   </a>
-  <a href="https://github.com/onlyLucky/webpack-principle">
+  <a href="https://github.com/onlyLucky/web-cli">
     <img src="https://s4.ax1x.com/2022/02/28/bu6sSK.png" alt="build">
   </a>
-  <a href="https://github.com/onlyLucky/webpack-principle">
+  <a href="https://github.com/onlyLucky/web-cli">
     <img src="https://s4.ax1x.com/2022/02/28/bu6DW6.png" alt="license">
-  </a> -->
+  </a>
 </div>
 
 ## 目录
@@ -60,7 +60,11 @@ The web's scaffolding tool for modern webapps
 
 ## Yeoman基本使用
 
+安装使用
 
+```shell
+$ npm i -g yo /  yarn global add yo
+```
 
 
 **相关参考**
