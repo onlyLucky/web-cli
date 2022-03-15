@@ -55,7 +55,12 @@
 The web's scaffolding tool for modern webapps
 
 
-$ yo chrome-extension
+[![bxbFPI.png](https://s1.ax1x.com/2022/03/15/bxbFPI.png)](https://imgtu.com/i/bxbFPI)
+
+
+## Yeoman基本使用
+
+
 
 
 **相关参考**
