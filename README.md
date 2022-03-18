@@ -79,6 +79,65 @@ $ mkdir my-module
 $ yo node
 ```
 
+下面使用脚本创建一个简单的demo
+```shell
+$ mkdir my-modlue
+$ yo node
+$ yo node:cli
+```
+详细代码参考[my-module](my-module)
+
+### 下一步将该项目暴露到全局
+```shell
+$ yarn link
+```
+如果你看到以下内容，说明，项目暴露到全局成功
+
+info You can now run `yarn link "***你的项目名"` in the projects where you want to use this package and it will be used instead.
+
+### 测试全局能否查到项目
+```shell
+$ **你的项目名 --help  (my-module --help)
+```
+注意如果有下面的报错：
+
+ -bash: /usr/local/bin/my-module: Permission denied ，看来是没有权限导致的
+
+可以尝试如下方式
+
+
+1. 到上一个目录，
+```shell
+$ cd ..
+```
+2. 将该项目授权
+```shell
+$ sudo chmod -R 777 项目名
+```
+3. 回到项目中
+
+```shell
+$ cd my-module
+```
+4. 再次查看
+```shell
+$ my-module --help
+```
+在这里就可以看到控制台打印了下面这些东西
+```shell
+Usage
+    $ my-module [input]
+
+  Options
+    --foo  Lorem ipsum. [Default: false]
+
+  Examples
+    $ my-module
+    unicorns
+    $ my-module rainbows
+    unicorns & rainbows
+```
+
 ## Yeoman Sub Generator
 
 **相关参考**
