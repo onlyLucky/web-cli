@@ -62,10 +62,24 @@ The web's scaffolding tool for modern webapps
 
 安装使用
 
+- 全局范围安装yo
+
 ```shell
 $ npm i -g yo /  yarn global add yo
 ```
+- 安装对应的generator
 
+```shell
+$npm install generator-node --global # or yarn global add generator-node
+```
+- 通过yo运行generator
+```shell
+$ cd path/to/project-dir
+$ mkdir my-module
+$ yo node
+```
+
+## Yeoman Sub Generator
 
 **相关参考**
 
