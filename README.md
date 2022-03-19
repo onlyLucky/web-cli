@@ -222,8 +222,48 @@ txt文件内容是：
 
 ### 根据模版创建文件
 
+添加template文件夹，里面可以添加相应的模块文件，模块文件可以添加模版语法
 
+下面是foo.txt模版文件
+```txt
+foo ~~~~
 
+<%= title %>
+
+<% if (success){ %>
+  success test
+<% }%>
+```
+
+下面为生成器实现：
+```js
+const Generator = require('yeoman-generator')
+
+module.exports = class extends Generator {
+  writing(){
+    // 通过模版方式写入文件到目标目录中
+    // 模版文件路径
+    const temp = this.templatePath('foo.txt')
+    // 输出目标路径
+    const output = this.destinationPath('foo.txt')
+    // 模版数据上下文
+    const context = {
+      title: 'hello generator',
+      success: false
+    }
+    this.fs.copyTpl(temp,output,context)
+  }
+}
+```
+
+生成的项目里面的txt文件
+
+```txt
+foo ~~~~
+
+hello generator
+```
+相对于手动创建每一个文件，模版的方式大大提高了效率。
 
 **相关参考**
 
