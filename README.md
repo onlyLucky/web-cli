@@ -168,6 +168,33 @@ $ yo webapp
 ### 创建 Generator 模块
 Generator本质上就是一个NPM模块
 
+查看更多的代码[generator-sample](generator-sample)
+
+**文件架构**
+
+    │─generator            .................生成器目录
+    │    └── app           .................默认生成器目录
+    │    │    └─ index.js  .................默认生成器实现
+    │    └── component     .................其他生成器目录
+    │          └─ index.js .................其他生成器实现
+    └─ package.json        .................模块包配置文件
+
+注意
+
+> `generator-<name>`
+
+添加yeoman-generator，实现相关生成器
+
+使用 `yarn link`添加到全局
+```shell
+$ cd ..
+$ mkdir my-proj
+$ cd my-proj
+$ yo sample
+```
+下面会创建temp.txt
+
+
 
 **相关参考**
 
