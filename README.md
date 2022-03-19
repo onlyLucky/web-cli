@@ -185,6 +185,29 @@ Generator本质上就是一个NPM模块
 
 添加yeoman-generator，实现相关生成器
 
+
+```js
+const Generator = require('yeoman-generator')
+
+module.exports = class extends Generator {
+  writing(){
+    // yeoman 自动在生成文件阶段调用此方法
+    // 我们这里尝试往项目目录中写入文件
+    this.fs.write(
+      this.destinationPath('temp.txt'),
+      Math.random().toString()
+    )
+  }
+}
+```
+
+> generator 核心入口
+>
+> 需要导出一个继承来自Yeoman Generator 的类型
+> 
+>在yeoman工作时会自动调用我们在此类型中定义的生命周期
+
+
 使用 `yarn link`添加到全局
 ```shell
 $ cd ..
@@ -193,6 +216,12 @@ $ cd my-proj
 $ yo sample
 ```
 下面会创建temp.txt
+
+txt文件内容是：
+> 0.005328516798935423
+
+### 根据模版创建文件
+
 
 
 
