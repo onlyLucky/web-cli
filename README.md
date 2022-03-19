@@ -162,6 +162,12 @@ $ yarn golbal add generator-webapp
 $ yo webapp
 ```
 
+## 自定义Generator
+基于Yeoman搭建自己的脚手架
+
+### 创建 Generator 模块
+Generator本质上就是一个NPM模块
+
 
 **相关参考**
 
