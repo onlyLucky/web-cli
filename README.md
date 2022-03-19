@@ -140,5 +140,28 @@ Usage
 
 ## Yeoman Sub Generator
 
+### 常规使用步骤
+
+1. 明确你的需求
+2. 找到合适的Generator
+3. 全局范围安装找到的Generator
+4. 通过Yo运行对应的Generator
+5. 通过命令行交互填写选项
+6. 生成你所需要的项目结构
+
+下面我们跟着generator-webapp，进行简单的使用
+
+查看更多的代码[webapp](webapp)
+
+- 全局安装`generator-webapp`
+```shell
+$ yarn golbal add generator-webapp
+```
+- 创建webapp项目，使用generator
+```shell
+$ yo webapp
+```
+
+
 **相关参考**
 
