@@ -20,7 +20,14 @@
 1. [简介](#简介)
 
 
+
 ## 简介
+
+<div align="center">
+  <a href="https://github.com/onlyLucky/web-cli">
+    <img src="https://s1.ax1x.com/2022/03/20/qZhCMd.png" alt="yeoman" border="0" />
+  </a>
+</div>
 
 脚手架的本质作用---- 创建项目基础结构、提供项目规范和约定
 
@@ -264,6 +271,32 @@ foo ~~~~
 hello generator
 ```
 相对于手动创建每一个文件，模版的方式大大提高了效率。
+
+### 接收用户输入数据
+
+```js
+const Generator = require('yeoman-generator')
+
+module.exports = class extends Generator {
+  prompting(){
+    return this.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Your project name',
+        default: this.appname   //appname 为项目生成文件名称
+      }
+    ]).then(answers=>{
+      // answers => {name: 'user input name'}
+      this.answers = answers
+    })
+  }
+  ......
+}
+```
+在这里调用了继承类Generator的prompting的方法调用，返回一个promise接受一个数组传递数据，其中可以分为多个类型
+
+
 
 **相关参考**
 
