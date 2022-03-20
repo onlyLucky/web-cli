@@ -296,6 +296,27 @@ module.exports = class extends Generator {
 ```
 在这里调用了继承类Generator的prompting的方法调用，返回一个promise接受一个数组传递数据，其中可以分为多个类型
 
+最后执行结果，会在用户回答问题之后，在这个文件夹里面创建foo.txt和bar.html
+
+### 发布Generator
+
+其实这里发布Generator的过程实则还是npm包的发布流程
+
+在上传到git仓库之后
+
+```shell
+$ npm publish
+$ npm publish --registry=http://registry.npmjs.org
+# yarn
+$ yarn publish --registry=http://registry.yarnpkg.com
+```
+输入自己npm的账号密码
+
+## Vue Generator 案例
+
+
+
+
 
 
 **相关参考**
