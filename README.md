@@ -314,10 +314,18 @@ $ yarn publish --registry=http://registry.yarnpkg.com
 
 ## Vue Generator 案例
 
+查看更多的代码[generator-only-vue](generator-only-vue)
 
+全局代码设置完成之后,链接到全局
 
+```shell
+$ npm link
+$ cd ..
+$ yo only-vue
+```
+生成填写项目名称为`vue-project`
 
-
+详细效果查看[vue-project](vue-project)
 
 **相关参考**
 
