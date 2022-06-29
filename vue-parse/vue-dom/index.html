@@ -1,0 +1,168 @@
+<!--
+ * @Author: fg
+ * @Date: 2022-06-29 19:32:42
+ * @LastEditors: fg
+ * @LastEditTime: 2022-06-29 19:32:54
+ * @Description: content
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <div id="app">
+       <input type="text" v-model='msg'/>
+       {{msg}}
+   </div>
+   <script>
+       var step;
+       //编译节点的方法
+       function compile(node, vm) {
+           var reg = /\{\{(.*)\}\}/; // 来匹配{{xxx}}中的xxx
+           //如果是元素节点
+           if(node.nodeType===1)
+           {
+               var attr=node.attributes;
+               //遍历所有节点属性
+               for(var i=0;i<attr.length;i++)
+               {
+                   if(attr[i].nodeName=="v-model")
+                   {
+                         //console.log(attr[i].nodeValue);
+                         var name=attr[i].nodeValue;//看看与哪个数据相关
+                         node.addEventListener("input",function (e){
+                             //将与其相关的数据改为最新值
+                             vm[name]=e.target.value;
+                         });  
+                         //vue对象上的data属性上的msg值给到界面
+                         node.value=vm.data[name];
+                         node.removeAttribute("v-model");
+
+                   }
+               }
+           }
+           //如果是文本节点
+           else if(node.nodeType===3)
+           {
+               if(reg.test(node.nodeValue))//{{msg}}
+               {
+                   var name=RegExp.$1.trim();//获取到匹配的字符串
+                   //node.nodeValue=vm.data[name];//将data中的值赋予给该node
+                   //创建监听者
+                   new watch(vm,node,name);
+               }
+           }
+       }
+       //获取当前app节点内部的所有子节点
+       function nodeToFragment(node, vm) {
+           var fragment = document.createDocumentFragment();
+           var child;
+           while (child = node.firstChild) {
+               compile(child, vm);
+               fragment.appendChild(child);
+           }
+           return fragment;
+       }
+       //订阅集合
+       function Step()
+       {
+           this.subs=[];
+       }
+       Step.prototype={
+           addSub(sub){
+               //添加订阅
+               this.subs.push(sub);
+           },
+           update(){
+               //更新订阅
+               this.subs.forEach((sub)=>{
+                   //实现更新
+                   //console.log("重新更新");
+                   //调用的是订阅者自身的update
+                   sub.update();
+               });
+           }
+       }
+
+       //构建一个函数类  监听属性变化的功能
+       function changeData(obj,key,val){
+           step=new Step();
+           Object.defineProperty(obj,key,{
+               get(){
+                   //console.log("添加订阅");
+                   //添加订阅
+                   if(step.target)
+                   {
+                       //添加当前的监听者
+                       step.addSub(step.target);
+                   }
+                   return val;
+               },
+               set(newval){
+                   //console.log("更新");
+                   if(newval==val)
+                   {
+                       return;
+                   }
+                   val=newval;
+                   //修改完成值之后 进行通知
+                   step.update();
+               }
+           });
+       }
+       //创建函数  执行这个观察者里面的遍历
+       //这个观察者是对这个订阅集合进行遍历的
+       function observe(obj,vm)
+       {   
+           for(let key of Object.keys(obj))
+           {
+               changeData(vm,key,obj[key]); 
+           }
+       }
+
+       //创建监听  单独的订阅者
+       function watch(vm,node,name){
+           step.target=this;
+           this.vm=vm;
+           this.name=name;
+           this.node=node;
+           this.update();
+           step.target=null;
+
+       }
+       watch.prototype={
+           update(){
+               this.get();
+               //用变化之后值修改界面元素
+               this.node.nodeValue=this.value;
+           },
+           get(){
+               //获取当前vue中msg变化之后的值
+               this.value=this.vm[this.name];
+           }
+       }
+
+       //模拟一个vue对象
+       function Vue(options) {
+           this.data = options.data;
+           //大的观察者
+           observe(this.data,this);
+           let id = options.el.match(/(?<=#)\w+/)[0];
+           //获取当前的节点
+           let dom = nodeToFragment(document.getElementById(id), this);
+           //console.log(dom);
+           document.getElementById(id).appendChild(dom);
+       }
+       new Vue({
+           el: '#app',
+           data: {
+               msg: "Hello world!!"
+           }
+       });
+   </script>
+</body>
+</html>
